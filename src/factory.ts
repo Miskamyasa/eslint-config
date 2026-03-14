@@ -1,8 +1,19 @@
 import eslint from "@eslint/js"
 import type {Linter} from "eslint"
 
-import {imports, javascript, react, stylistic, typescript} from "./configs/index"
-import {GLOB_EXCLUDE} from "./globs"
+import {
+  formatters,
+  imports,
+  javascript,
+  jsonc,
+  markdown,
+  react,
+  stylistic,
+  toml,
+  typescript,
+  yaml,
+} from "./configs/index"
+import {GLOB_EXCLUDE, GLOB_SRC} from "./globs"
 import type {OptionsConfig} from "./types"
 
 /**
@@ -29,6 +40,11 @@ export function createConfig(
   const {
     tsconfigRootDir = process.cwd(),
     ignores = [],
+    jsonc: enableJsonc = true,
+    yaml: enableYaml = true,
+    toml: enableToml = true,
+    markdown: enableMarkdown = true,
+    formatters: enableFormatters = false,
   } = options
 
   return [
@@ -41,10 +57,12 @@ export function createConfig(
       ],
     },
 
-    // ESLint recommended
+    // ESLint recommended rules (scoped to source files -
+    // core rules use JS-specific sourceCode APIs incompatible with other languages)
     {
-      ...eslint.configs.recommended,
       name: "miskamyasa/eslint/recommended",
+      files: GLOB_SRC,
+      rules: eslint.configs.recommended.rules,
     },
 
     // TypeScript
@@ -58,6 +76,21 @@ export function createConfig(
 
     // Stylistic
     ...stylistic(),
+
+    // JSONC/JSON
+    ...(enableJsonc ? jsonc() : []),
+
+    // YAML
+    ...(enableYaml ? yaml() : []),
+
+    // TOML
+    ...(enableToml ? toml() : []),
+
+    // Markdown
+    ...(enableMarkdown ? markdown() : []),
+
+    // Formatters (Prettier via ESLint for CSS, HTML, XML, etc.)
+    ...(enableFormatters ? formatters(enableFormatters) : []),
 
     // JavaScript/CJS overrides (must come after TypeScript rules)
     ...javascript(),

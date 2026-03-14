@@ -1,19 +1,29 @@
 import stylisticPlugin from "@stylistic/eslint-plugin"
 import type {Linter} from "eslint"
 
-export function stylistic(): Linter.Config[] {
-  const stylistic = stylisticPlugin
+import {GLOB_SRC} from "../globs"
 
+export function stylistic(): Linter.Config[] {
   return [
+    // Plugin setup (global - registers the @stylistic plugin)
     {
-      ...(stylistic.configs["disable-legacy"]),
-      name: "miskamyasa/stylistic/disable-legacy",
+      name: "miskamyasa/stylistic/setup",
+      plugins: {
+        "@stylistic": stylisticPlugin,
+      },
     },
+
+    // Disable legacy ESLint formatting rules - scoped to source files
+    {
+      name: "miskamyasa/stylistic/disable-legacy",
+      files: GLOB_SRC,
+      rules: stylisticPlugin.configs["disable-legacy"].rules,
+    },
+
+    // Stylistic rules - scoped to source files
     {
       name: "miskamyasa/stylistic/rules",
-      plugins: {
-        "@stylistic": stylistic,
-      },
+      files: GLOB_SRC,
       rules: {
         "@stylistic/block-spacing": ["error", "never"],
         "@stylistic/comma-dangle": ["error", "always-multiline"],

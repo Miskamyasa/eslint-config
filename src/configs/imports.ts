@@ -1,31 +1,51 @@
 import type {Linter} from "eslint"
 import {createTypeScriptImportResolver} from "eslint-import-resolver-typescript"
-import {flatConfigs as imports} from "eslint-plugin-import-x"
+import {flatConfigs as importConfigs} from "eslint-plugin-import-x"
 import unusedImports from "eslint-plugin-unused-imports"
+
+import {GLOB_SRC} from "../globs"
 
 function createImportsConfig(): Linter.Config[] {
   return [
+    // Plugin setup (global - registers import-x and unused-imports plugins)
     {
-      ...imports.recommended,
-      name: "miskamyasa/imports/recommended",
+      name: "miskamyasa/imports/setup",
+      plugins: {
+        ...importConfigs.recommended.plugins,
+        "unused-imports": unusedImports,
+      },
     },
+
+    // Recommended rules - scoped to source files
     {
-      ...imports.react,
+      name: "miskamyasa/imports/recommended-rules",
+      files: GLOB_SRC,
+      rules: importConfigs.recommended.rules,
+    },
+
+    // React settings - scoped to source files
+    {
       name: "miskamyasa/imports/react",
+      files: GLOB_SRC,
+      settings: importConfigs.react.settings,
+      languageOptions: importConfigs.react.languageOptions,
     },
+
+    // TypeScript resolver
     {
       name: "miskamyasa/imports/typescript",
+      files: GLOB_SRC,
       settings: {
         "import-x/resolver-next": [
           createTypeScriptImportResolver(),
         ],
       },
     },
+
+    // Custom rules - scoped to source files
     {
       name: "miskamyasa/imports/rules",
-      plugins: {
-        "unused-imports": unusedImports,
-      },
+      files: GLOB_SRC,
       rules: {
         "import-x/namespace": "off",
         "import-x/newline-after-import": [

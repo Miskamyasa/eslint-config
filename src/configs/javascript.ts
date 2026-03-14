@@ -1,12 +1,12 @@
 import type {Linter} from "eslint"
 
-import {GLOB_CJS, GLOB_JS} from "../globs"
+import {GLOB_CJS} from "../globs"
 
 export function javascript(): Linter.Config[] {
   return [
     {
       name: "miskamyasa/javascript/overrides",
-      files: [GLOB_JS, GLOB_CJS],
+      files: ["**/*.js", GLOB_CJS],
       languageOptions: {
         globals: {
           require: "readonly",

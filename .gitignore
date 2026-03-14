@@ -36,4 +36,4 @@ Thumbs.db
 !.env.example
 
 # Repomix output (reference files)
-repomix-output-*.md
+# repomix-output-*.md
