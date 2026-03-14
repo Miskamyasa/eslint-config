@@ -7,3 +7,7 @@ supportedArchitectures:
   os: [darwin, linux]
 
 trustPolicy: off
+
+onlyBuiltDependencies:
+  - esbuild
+  - unrs-resolver

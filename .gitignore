@@ -1,0 +1,39 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+
+# Cache & Temporary
+*.tsbuildinfo
+.eslintcache
+*.tmp
+*.temp
+
+# Package archives
+*.tgz
+
+# Operating System
+.DS_Store
+.DS_Store?
+._*
+Thumbs.db
+
+# Editor & IDE
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# Repomix output (reference files)
+repomix-output-*.md
