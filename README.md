@@ -2,6 +2,8 @@
 
 Opinionated ESLint config for React + TypeScript projects.
 
+Highly inspired by [antfu](https://github.com/antfu/eslint-config)
+
 ## What's included
 
 ### JS/TS
