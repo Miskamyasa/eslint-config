@@ -5,13 +5,3 @@ storeDir: /Users/dzaitsev/.local/share/pnpm/store
 supportedArchitectures:
   cpu: [arm64]
   os: [darwin, linux]
-
-trustPolicy: off
-
-onlyBuiltDependencies:
-  - esbuild
-  - unrs-resolver
-
-allowBuilds:
-  esbuild: set this to true or false
-  unrs-resolver: set this to true or false
