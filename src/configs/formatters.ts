@@ -77,7 +77,7 @@ export function formatters(options: OptionsFormatters | true = {}): Linter.Confi
       {
         name: "miskamyasa/formatters/css",
         files: [GLOB_CSS, GLOB_POSTCSS],
-        languageOptions: {parser: parserPlain as Linter.Parser},
+        languageOptions: {parser: parserPlain},
         rules: {
           "format/prettier": ["error", {...prettierOptions, parser: "css"}],
         },
@@ -85,7 +85,7 @@ export function formatters(options: OptionsFormatters | true = {}): Linter.Confi
       {
         name: "miskamyasa/formatters/scss",
         files: [GLOB_SCSS],
-        languageOptions: {parser: parserPlain as Linter.Parser},
+        languageOptions: {parser: parserPlain},
         rules: {
           "format/prettier": ["error", {...prettierOptions, parser: "scss"}],
         },
@@ -93,7 +93,7 @@ export function formatters(options: OptionsFormatters | true = {}): Linter.Confi
       {
         name: "miskamyasa/formatters/less",
         files: [GLOB_LESS],
-        languageOptions: {parser: parserPlain as Linter.Parser},
+        languageOptions: {parser: parserPlain},
         rules: {
           "format/prettier": ["error", {...prettierOptions, parser: "less"}],
         },
@@ -105,7 +105,7 @@ export function formatters(options: OptionsFormatters | true = {}): Linter.Confi
     configs.push({
       name: "miskamyasa/formatters/html",
       files: [GLOB_HTML],
-      languageOptions: {parser: parserPlain as Linter.Parser},
+      languageOptions: {parser: parserPlain},
       rules: {
         "format/prettier": ["error", {...prettierOptions, parser: "html"}],
       },
@@ -116,7 +116,7 @@ export function formatters(options: OptionsFormatters | true = {}): Linter.Confi
     configs.push({
       name: "miskamyasa/formatters/xml",
       files: [GLOB_XML],
-      languageOptions: {parser: parserPlain as Linter.Parser},
+      languageOptions: {parser: parserPlain},
       rules: {
         "format/prettier": ["error", {...prettierOptions, parser: "xml", plugins: ["@prettier/plugin-xml"]}],
       },
@@ -127,7 +127,7 @@ export function formatters(options: OptionsFormatters | true = {}): Linter.Confi
     configs.push({
       name: "miskamyasa/formatters/svg",
       files: [GLOB_SVG],
-      languageOptions: {parser: parserPlain as Linter.Parser},
+      languageOptions: {parser: parserPlain},
       rules: {
         "format/prettier": ["error", {...prettierOptions, parser: "xml", plugins: ["@prettier/plugin-xml"]}],
       },
@@ -138,7 +138,7 @@ export function formatters(options: OptionsFormatters | true = {}): Linter.Confi
     configs.push({
       name: "miskamyasa/formatters/markdown",
       files: [GLOB_MARKDOWN],
-      languageOptions: {parser: parserPlain as Linter.Parser},
+      languageOptions: {parser: parserPlain},
       rules: {
         "format/prettier": ["error", {...prettierOptions, embeddedLanguageFormatting: "off", parser: "markdown"}],
       },
@@ -149,7 +149,7 @@ export function formatters(options: OptionsFormatters | true = {}): Linter.Confi
     configs.push({
       name: "miskamyasa/formatters/graphql",
       files: [GLOB_GRAPHQL],
-      languageOptions: {parser: parserPlain as Linter.Parser},
+      languageOptions: {parser: parserPlain},
       rules: {
         "format/prettier": ["error", {...prettierOptions, parser: "graphql"}],
       },
