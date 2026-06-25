@@ -83,6 +83,10 @@ export function typescript(options: {tsconfigRootDir: string}): Linter.Config[] 
           "error",
           {checksVoidReturn: {attributes: false}},
         ],
+        "@typescript-eslint/switch-exhaustiveness-check": [
+          "error",
+          {allowDefaultCaseForExhaustiveSwitch: false},
+        ],
       },
     },
   ]

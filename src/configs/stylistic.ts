@@ -1,7 +1,43 @@
 import stylisticPlugin from "@stylistic/eslint-plugin"
-import type {Linter} from "eslint"
+import type {Linter, Rule} from "eslint"
 
 import {GLOB_SRC} from "../globs"
+
+const JSX_SORT_PROPS_DEPRECATION_WARNING =
+  "[@stylistic/eslint-plugin]: You are using deprecated rule(\"jsx-sort-props\")"
+
+const jsxSortPropsRule = stylisticPlugin.rules["jsx-sort-props"]
+
+const patchedStylisticPlugin = {
+  ...stylisticPlugin,
+  rules: {
+    ...stylisticPlugin.rules,
+    "jsx-sort-props": {
+      ...jsxSortPropsRule,
+      create(context: Rule.RuleContext) {
+        const warn = console.warn
+
+        console.warn = (...args) => {
+          if (
+            typeof args[0] === "string"
+            && args[0].startsWith(JSX_SORT_PROPS_DEPRECATION_WARNING)
+          ) {
+            return
+          }
+
+          warn(...args)
+        }
+
+        try {
+          return jsxSortPropsRule.create(context)
+        }
+        finally {
+          console.warn = warn
+        }
+      },
+    },
+  },
+}
 
 export function stylistic(): Linter.Config[] {
   return [
@@ -9,7 +45,7 @@ export function stylistic(): Linter.Config[] {
     {
       name: "miskamyasa/stylistic/setup",
       plugins: {
-        "@stylistic": stylisticPlugin,
+        "@stylistic": patchedStylisticPlugin,
       },
     },
 
@@ -169,6 +205,13 @@ export function stylistic(): Linter.Config[] {
         "no-console": ["warn", {allow: ["warn", "error"]}],
         "brace-style": ["error", "stroustrup"],
         "no-use-before-define": "error",
+        "no-restricted-syntax": ["error", {
+          "selector": [
+            "SwitchStatement:has(SwitchCase > BlockStatement.consequent)",
+            "> SwitchCase:has(> *.consequent[type!='BlockStatement'])",
+          ].join(" "),
+          "message": "Switch cases must consistently use braces when any case uses braces",
+        }],
       },
     },
   ]
