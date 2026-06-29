@@ -5,7 +5,7 @@ import reactHooksPlugin from "eslint-plugin-react-hooks"
 import {GLOB_SRC} from "../globs"
 
 export function react(): Linter.Config[] {
-  const preset = reactPlugin.configs["recommended-typescript"] as Linter.Config
+  const preset = reactPlugin.configs["recommended-typescript"]
 
   return [
     // Plugin setup (global - registers all react plugins)
