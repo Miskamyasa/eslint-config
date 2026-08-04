@@ -17,7 +17,7 @@ const patchedStylisticPlugin = {
       create(context: Rule.RuleContext) {
         const warn = console.warn
 
-        console.warn = (...args) => {
+        console.warn = (...args: unknown[]) => {
           if (
             typeof args[0] === "string"
             && args[0].startsWith(JSX_SORT_PROPS_DEPRECATION_WARNING)

@@ -9,7 +9,14 @@
     "noEmit": true,
     "declaration": true,
     "isolatedModules": true,
-    "verbatimModuleSyntax": true
+    "verbatimModuleSyntax": true,
+    "types": [
+      "node"
+    ],
+    "ignoreDeprecations": "6.0"
   },
-  "include": ["src", "*.config.ts"]
+  "include": [
+    "src",
+    "*.config.ts"
+  ]
 }
