@@ -203,7 +203,8 @@ export function stylistic(): Linter.Config[] {
         ],
         "comma-spacing": ["error", {"before": false, "after": true}],
         "no-console": ["warn", {allow: ["warn", "error"]}],
-        "brace-style": ["error", "stroustrup"],
+        "brace-style": ["error", "stroustrup", { "allowSingleLine": false }],
+        "curly": ["error", "all"],
         "no-use-before-define": "error",
         "no-restricted-syntax": ["error", {
           "selector": [
