@@ -2,7 +2,7 @@
 
 ## Project overview
 
-`@miskamyasa/eslint-config` is a reusable ESLint flat config package for React + TypeScript projects. It exports a factory function that composes opinionated ESLint rules from multiple plugins. Beyond JS/TS, it also lints JSON, YAML, TOML, and Markdown files out of the box, with optional Prettier-based formatting for CSS, HTML, and more.
+`@miskamyasa/eslint-config` is a reusable ESLint flat config package for React + TypeScript projects. It exports a factory function that composes opinionated ESLint rules from multiple plugins. Beyond JS/TS, it also lints JSON/JSONC/JSON5 files out of the box.
 
 ## Tech stack
 
@@ -18,8 +18,8 @@
 src/
   index.ts              # Package entry point, default export = createConfig factory function
   factory.ts            # createConfig() factory composing all config modules
-  types.ts              # OptionsConfig, OptionsFormatters, and ConfigItem types
-  globs.ts              # Glob pattern constants (GLOB_SRC, GLOB_YAML, GLOB_EXCLUDE, etc.)
+  types.ts              # OptionsConfig and ConfigItem types
+  globs.ts              # Glob pattern constants (GLOB_SRC, GLOB_JSON, GLOB_EXCLUDE, etc.)
   configs/
     index.ts            # Barrel export for all config modules
     typescript.ts       # typescript-eslint setup + strict/stylistic rules
@@ -28,10 +28,6 @@ src/
     react.ts            # @eslint-react + react-hooks plugin setup + rules
     javascript.ts       # CommonJS overrides for .js/.cjs files
     jsonc.ts            # eslint-plugin-jsonc setup + rules for JSON/JSONC/JSON5
-    yaml.ts             # eslint-plugin-yml setup + rules for YAML
-    toml.ts             # eslint-plugin-toml setup + rules for TOML
-    markdown.ts         # @eslint/markdown setup + GFM rules for Markdown
-    formatters.ts       # eslint-plugin-format (Prettier) for CSS, HTML, XML, etc.
 eslint.config.ts        # Dogfoods the local source
 tsup.config.ts          # Build configuration
 tsconfig.json           # TypeScript configuration
@@ -95,7 +91,7 @@ Key conventions:
 - Every config object must have a `name` property prefixed with `"miskamyasa/"`.
 - Plugin presets are **decomposed**, not spread blindly — extract `plugins`, `rules`, `settings` separately and scope them with `files`.
 - Plugin type mismatches use `as unknown as Record<string, unknown>` (see `react.ts`).
-- Parsers that lack a default export use `import * as parser from "..."` (see `jsonc.ts`, `yaml.ts`, `toml.ts`).
+- Parsers that lack a default export use `import * as parser from "..."` (see `jsonc.ts`).
 
 ### Dependencies
 
@@ -127,4 +123,4 @@ Key conventions:
 
 - All rules live in their respective `src/configs/*.ts` files
 - The composition order in `src/factory.ts` matters: later configs override earlier ones
-- Current order: ignores -> eslint recommended -> typescript -> imports -> react -> stylistic -> jsonc -> yaml -> toml -> markdown -> formatters -> javascript overrides -> user configs
+- Current order: ignores -> eslint recommended -> typescript -> imports -> react -> stylistic -> jsonc -> javascript overrides -> user configs

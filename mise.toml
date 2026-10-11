@@ -5,3 +5,6 @@ pnpm = "12.11.2"
 
 # Ai related
 pi = "0.87.1"
+
+[tasks.setup]
+run = "pnpm install --frozen-lockfile"

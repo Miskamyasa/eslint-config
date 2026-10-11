@@ -2,16 +2,12 @@ import eslint from "@eslint/js"
 import type {Linter} from "eslint"
 
 import {
-  formatters,
   imports,
   javascript,
   jsonc,
-  markdown,
   react,
   stylistic,
-  toml,
   typescript,
-  yaml,
 } from "./configs/index"
 import {GLOB_EXCLUDE, GLOB_SRC} from "./globs"
 import type {OptionsConfig} from "./types"
@@ -41,10 +37,6 @@ export function createConfig(
     tsconfigRootDir = process.cwd(),
     ignores = [],
     jsonc: enableJsonc = true,
-    yaml: enableYaml = true,
-    toml: enableToml = true,
-    markdown: enableMarkdown = true,
-    formatters: enableFormatters = false,
   } = options
 
   return [
@@ -79,18 +71,6 @@ export function createConfig(
 
     // JSONC/JSON
     ...(enableJsonc ? jsonc() : []),
-
-    // YAML
-    ...(enableYaml ? yaml() : []),
-
-    // TOML
-    ...(enableToml ? toml() : []),
-
-    // Markdown
-    ...(enableMarkdown ? markdown() : []),
-
-    // Formatters (Prettier via ESLint for CSS, HTML, XML, etc.)
-    ...(enableFormatters ? formatters(enableFormatters) : []),
 
     // JavaScript/CJS overrides (must come after TypeScript rules)
     ...javascript(),
