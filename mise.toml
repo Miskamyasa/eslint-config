@@ -1,6 +1,6 @@
 [tools]
 python = "3.11.15"
-node = "26.6.0"
+node = "26.12.1"
 pnpm = "12.11.2"
 
 # Ai related

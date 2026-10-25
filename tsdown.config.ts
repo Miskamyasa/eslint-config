@@ -1,4 +1,4 @@
-import {defineConfig} from "tsup"
+import {defineConfig} from "tsdown"
 
 // eslint-disable-next-line import-x/no-default-export
 export default defineConfig({
@@ -7,4 +7,5 @@ export default defineConfig({
   dts: true,
   clean: true,
   shims: true,
+  target: false,
 })
