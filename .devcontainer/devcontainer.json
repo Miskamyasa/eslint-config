@@ -1,6 +1,6 @@
 {
   "name": "eslint-config",
-  "image": "miskamyasa/mise-ub-24-04",
+  "image": "miskamyasa/mise-ub-26-04",
   "remoteUser": "ubuntu",
   "workspaceFolder": "${localWorkspaceFolder}",
   "workspaceMount": "source=${localWorkspaceFolder},target=${localWorkspaceFolder},type=bind",
@@ -18,10 +18,8 @@
     // pnpm store mount
     "source=${localEnv:PNPM_STORE_DIR},target=${localEnv:PNPM_STORE_DIR},type=bind",
     // Pi
-    "source=${localEnv:HOME}/.pi/agent,target=/home/ubuntu/.pi/agent,type=bind",
+    "source=${localEnv:HOME}/.pi/agent,target=/home/ubuntu/.pi/agent,type=bind"
   ],
-  "runArgs": [
-    "--name=eslint-config"
-  ],
+  "runArgs": ["--name=eslint-config"],
   "postCreateCommand": "mise self-update -y && mise install"
 }
